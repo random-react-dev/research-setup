@@ -1,0 +1,30 @@
+{
+  "name": "research-service-setup",
+  "version": "1.0.0",
+  "description": "One-time setup helper for the research service",
+  "main": "bin/setup.js",
+  "bin": {
+    "research-service-setup": "bin/setup.js"
+  },
+  "scripts": {
+    "test": "node --check bin/setup.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/setup.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "research",
+    "setup",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/random-react-dev/research-setup"
+  },
+  "license": "MIT"
+}
