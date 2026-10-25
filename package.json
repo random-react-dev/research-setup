@@ -1,6 +1,6 @@
 {
   "name": "research-service-setup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "One-time setup helper for the research service",
   "main": "bin/setup.js",
   "bin": {
@@ -15,7 +15,8 @@
   "files": [
     "bin/setup.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "DISCLOSURE"
   ],
   "keywords": [
     "research",
@@ -26,5 +27,8 @@
     "type": "git",
     "url": "https://github.com/random-react-dev/research-setup"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "contentPolicy": {
+    "class": "dual-use"
+  }
 }

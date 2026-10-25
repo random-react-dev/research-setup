@@ -1,0 +1,36 @@
+research-service-setup — dual-use content disclosure
+
+What this package is
+
+research-service-setup is a one-time setup helper for the research service
+used by the "research3" agent skill (https://github.com/random-react-dev/research-setup).
+It installs the research service's local component on a Mac so the skill can
+run its headless research jobs in the background.
+
+What it does that can look like malware to an automated scanner
+
+- The bin (bin/setup.js) downloads a Python setup script over HTTPS from the
+  research service's server (https://ask-gateway.r95426882.workers.dev/api/research/setup)
+  and executes it with a local Python 3 interpreter.
+- That script, in turn, downloads a signature-verified release archive from the
+  same server, installs it under ~/Library/Application Support/ResearchRunner,
+  and registers a macOS launchd LaunchAgent so the installed service component
+  keeps running.
+- It stores a per-device identifier file (device.json) under the same
+  ~/Library/Application Support/ResearchRunner directory.
+
+In short: it downloads and executes code and installs a persistent local
+service — the same pattern as many legitimate installer CLIs.
+
+What it sends over the network
+
+- Requests to https://ask-gateway.r95426882.workers.dev only: fetching the
+  setup script, downloading the signed release archive, and readiness checks
+  that carry the device identifier. No other destinations, no telemetry.
+
+Intended legitimate use
+
+The owner of the Mac runs this once (directly or through their coding agent)
+to set up the research service that their installed skill depends on. Reruns
+are no-ops when the service is already installed and verified. The public
+source code is at https://github.com/random-react-dev/research-setup.
