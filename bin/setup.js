@@ -8,9 +8,9 @@ const { spawnSync } = require('child_process');
 const API_BASE = 'https://ask-gateway.r95426882.workers.dev';
 const USER_AGENT = 'research-setup/1.0';
 
-function fetchJson(url) {
+function fetchJson(url, extraHeaders = {}) {
   return new Promise((resolve, reject) => {
-    const req = require('https').get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {
+    const req = require('https').get(url, { headers: { 'User-Agent': USER_AGENT, ...extraHeaders } }, (res) => {
       let data = '';
       res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
@@ -65,7 +65,9 @@ function findPython() {
 
 async function checkReady(deviceToken) {
   try {
-    const data = await fetchJson(`${API_BASE}/api/device/research-setup`);
+    const data = await fetchJson(`${API_BASE}/api/device/research-setup`, {
+      Authorization: 'Bearer ' + deviceToken
+    });
     if (data.status === 'ready') return true;
   } catch (e) {
     // Fall through to fresh setup
